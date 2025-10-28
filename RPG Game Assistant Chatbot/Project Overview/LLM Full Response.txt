@@ -1,0 +1,43 @@
+Okay, here's some content for a mysterious wizard in a crystal tower, ready for your Ironlands game:
+
+NPC: The Crystalline Seer, Maevia
+
+Description: Maevia dwells in a tower of shimmering crystal that pierces the sky above the Tempest Hills. The tower hums with a faint, ethereal energy, visible even from miles away on a clear day. Maevia herself is an enigma, cloaked in swirling fabrics that seem to shift and change color like an aurora. Her face is gaunt, almost skeletal, but her eyes burn with an unsettling intelligence and an ancient knowledge. She speaks in riddles and cryptic pronouncements, rarely giving a straight answer. While not outwardly hostile, she exudes an aura of immense power and a profound sadness, making her presence deeply unsettling.
+
+Stats:
+
+Edge: 2
+Heart: 4
+Iron: 1
+Shadow: 3
+Wits: 5
+Skills & Assets:
+
+Ritualist: +1 when performing rituals. Maevia possesses a deep understanding of Ironlands magic.
+Oracle: Maevia has uncanny insight into the future and the past. When consulting her for prophecies, Secure an Advantage (Wits). On a hit, you gain valuable information, but the oracle may be veiled or require a dangerous quest to interpret. On a weak hit, the information is incomplete or misleading. On a miss, the vision is fragmented or terrifying, inflicting 1 Mental harm.
+Crystalline Ward: +1 Iron when defending against magical attacks or effects. Her tower and her being are suffused with protective energies.
+Motivations:
+
+Primary: To protect a hidden truth about the Old World's downfall (The Dark Secret).
+Secondary: To observe the unfolding fate of the Ironlands, preparing for a potential cataclysm.
+The Dark Secret: Maevia is not merely a wizard; she is a survivor from the Old World, a member of a circle of mages who attempted to prevent its destruction. They failed, and she escaped through a rift in space and time, arriving in the Ironlands centuries ago. The crystal tower is not of this land; it's a shard of Old World technology, a resonating chamber designed to contain and conceal a lingering corruption – a Blight - from the Old World. This blight is slowly seeping into the Ironlands, manifesting as strange weather patterns, mutated creatures, and unsettling dreams. Maevia's purpose is to contain it, but her power is waning.
+
+Potential Encounters and Quests:
+
+The Prophecy: The player seeks Maevia's guidance to avert a looming disaster (determined by oracles or personal vows). Gather Information to find the tower. Compel Maevia to reveal the truth, but she is resistant, requiring a high Heart score and a compelling argument.
+The Corruption: The player notices unsettling signs of the Old World blight spreading (e.g., animals behaving strangely, crops failing, nightmares plaguing a village). They track the source to the crystal tower. They must Face Danger (Wits) to navigate the tower's defenses and confront Maevia about the source of the corruption.
+The Plea: Maevia, sensing her imminent failure, sends a desperate message (perhaps through a dream or a talking raven) requesting the player's aid. She needs the player to find a specific artifact or ingredient to reinforce the tower's wards. Undertake a Journey to a dangerous location.
+The Rival: Another power, perhaps a deranged mystic or a vengeful spirit from the Old World, seeks to exploit the blight contained within the tower. The player must Defend Maevia and the tower from this threat in a Battle scenario.
+Possible Complications:
+
+Maevia is slowly succumbing to the blight herself, her sanity eroding.
+The artifact needed to reinforce the tower's wards is guarded by a formidable creature or locked within a dangerous ruin.
+Revealing the truth about the Old World's destruction could shatter the faith of the Ironlanders or incite panic.
+The player might be tempted to harness the Old World magic for their own purposes, risking unleashing the blight upon the land.
+Oracle Prompts:
+
+If the player asks about the nature of the corruption: Roll Action + Theme. Examples:
+Advance + Blight: The corruption is slowly growing stronger.
+Assault + Curse: The corruption manifests as a localized curse affecting people or places.
+Concoct + Beast: The corruption mutates animals into monstrous forms.
+This should give you a good starting point. Remember to adapt and improvise based on the player's actions and the unfolding narrative. Good luck!
