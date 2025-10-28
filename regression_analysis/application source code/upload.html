@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data - Regression Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📁 Upload Your Data</h1>
+            <p>Regression Type: <strong>{{ regression_type|title }} Regression</strong></p>
+            <a href="/" class="btn btn-secondary">← Back to Home</a>
+        </header>
+
+        {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <div class="upload-section">
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">Choose Data File (CSV or Excel):</label>
+                    <input type="file" id="file" name="file" accept=".csv,.xlsx,.xls" required>
+                    <small>Supported formats: CSV, Excel (.xlsx, .xls)</small>
+                </div>
+                <input type="hidden" name="regression_type" value="{{ regression_type }}">
+                <button type="submit" class="btn btn-primary">Upload and Preview</button>
+            </form>
+        </div>
+
+        {% if columns %}
+        <div class="data-preview">
+            <h3>Data Preview (First 10 rows)</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            {% for column in columns %}
+                            <th>{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in df_preview %}
+                        <tr>
+                            {% for column in columns %}
+                            <td>{{ row[column] }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <form action="/analyze" method="POST">
+                <input type="hidden" name="regression_type" value="{{ regression_type }}">
+                {% if uploaded_filename %}
+                <input type="hidden" name="uploaded_filename" value="{{ uploaded_filename }}">
+                {% endif %}
+                
+                <div class="form-group">
+                    <label for="target_column">Target Column (Dependent Variable):</label>
+                    <select id="target_column" name="target_column" required>
+                        <option value="">Select target column</option>
+                        {% for column in numeric_columns %}
+                        <option value="{{ column }}">{{ column }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="feature_columns">Feature Columns (Independent Variables):</label>
+                    <div class="checkbox-group">
+                        {% for column in numeric_columns %}
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="feature_columns" value="{{ column }}" class="feature-checkbox">
+                            {{ column }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% if regression_type == 'polynomial' %}
+                <div class="form-group">
+                    <label for="degree">Polynomial Degree:</label>
+                    <select id="degree" name="degree">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                {% endif %}
+                
+                <button type="submit" class="btn btn-success">
+                    Run {{ regression_type|title }} Regression Analysis
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-select first column as target
+            const targetSelect = document.getElementById('target_column');
+            if (targetSelect && targetSelect.options.length > 1) {
+                targetSelect.selectedIndex = 1;
+            }
+            
+            // Auto-select all other columns as features
+            const featureCheckboxes = document.querySelectorAll('.feature-checkbox');
+            if (featureCheckboxes.length > 0 && targetSelect) {
+                const targetValue = targetSelect.value;
+                featureCheckboxes.forEach(checkbox => {
+                    if (checkbox.value !== targetValue) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
