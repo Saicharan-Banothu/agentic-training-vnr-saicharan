@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Analysis Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Regression Analysis Tool</h1>
+            <p>Upload your data and choose the regression type to analyze</p>
+        </header>
+
+        <div class="regression-cards">
+            <div class="card">
+                <h3>📈 Linear Regression</h3>
+                <p>Predict continuous outcomes with a straight line relationship</p>
+                <form action="/upload" method="POST">
+                    <input type="hidden" name="regression_type" value="linear">
+                    <button type="submit" class="btn btn-primary">Choose Linear</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>🔄 Polynomial Regression</h3>
+                <p>Model complex relationships with curved lines</p>
+                <form action="/upload" method="POST">
+                    <input type="hidden" name="regression_type" value="polynomial">
+                    <button type="submit" class="btn btn-primary">Choose Polynomial</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>🔮 Logistic Regression</h3>
+                <p>Predict categorical outcomes and classification</p>
+                <form action="/upload" method="POST">
+                    <input type="hidden" name="regression_type" value="logistic">
+                    <button type="submit" class="btn btn-primary">Choose Logistic</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>How to use:</h3>
+            <ol>
+                <li>Choose your regression type</li>
+                <li>Upload your data file (CSV or Excel)</li>
+                <li>Select target and feature columns</li>
+                <li>View analysis results and visualizations</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

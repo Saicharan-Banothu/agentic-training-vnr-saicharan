@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Regression Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Analysis Results</h1>
+            <p>{{ results.regression_type|title }} Regression Analysis</p>
+            <a href="/" class="btn btn-secondary">← New Analysis</a>
+        </header>
+
+        <div class="results-summary">
+            <h2>Summary</h2>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3>Target Variable</h3>
+                    <p>{{ results.target_column }}</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Feature Variables</h3>
+                    <p>{{ results.feature_columns|join(', ') }}</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Regression Type</h3>
+                    <p>{{ results.regression_type|title }}</p>
+                </div>
+                {% if results.regression_type == 'polynomial' %}
+                <div class="summary-card">
+                    <h3>Polynomial Degree</h3>
+                    <p>{{ results.degree }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="metrics-section">
+            <h2>Model Performance Metrics</h2>
+            <div class="metrics-cards">
+                {% if results.regression_type in ['linear', 'polynomial'] %}
+                <div class="metric-card">
+                    <h3>R² Score</h3>
+                    <p class="metric-value">{{ "%.4f"|format(results.r2_score) }}</p>
+                    <small>Higher is better (0-1)</small>
+                </div>
+                <div class="metric-card">
+                    <h3>Mean Squared Error</h3>
+                    <p class="metric-value">{{ "%.4f"|format(results.mse) }}</p>
+                    <small>Lower is better</small>
+                </div>
+                <div class="metric-card">
+                    <h3>Root Mean Squared Error</h3>
+                    <p class="metric-value">{{ "%.4f"|format(results.rmse) }}</p>
+                    <small>Lower is better</small>
+                </div>
+                {% elif results.regression_type == 'logistic' %}
+                <div class="metric-card">
+                    <h3>Accuracy</h3>
+                    <p class="metric-value">{{ "%.4f"|format(results.accuracy) }}</p>
+                    <small>Higher is better (0-1)</small>
+                </div>
+                {% if results.classes %}
+                <div class="metric-card">
+                    <h3>Classes</h3>
+                    <p class="metric-value">{{ results.classes|join(', ') }}</p>
+                    <small>Target classes</small>
+                </div>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        {% if results.regression_type in ['linear', 'logistic'] and results.coefficients %}
+        <div class="coefficients-section">
+            <h2>Model Coefficients</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Coefficient</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for feature, coef in results.coef_table %}
+                        <tr>
+                            <td>{{ feature }}</td>
+                            <td>{{ "%.4f"|format(coef) }}</td>
+                            <td>
+                                {% if coef > 0 %}
+                                <span style="color: green;">Positive relationship</span>
+                                {% else %}
+                                <span style="color: red;">Negative relationship</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="intercept-row">
+                            <td><strong>Intercept</strong></td>
+                            <td><strong>{{ "%.4f"|format(results.intercept|default(0.0)) }}</strong></td>
+                            <td>Base value when all features are zero</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if results.regression_type == 'logistic' and results.confusion_matrix %}
+        <div class="confusion-matrix">
+            <h2>Confusion Matrix</h2>
+            <div class="table-container">
+                <table class="confusion-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Predicted Negative (0)</th>
+                            <th>Predicted Positive (1)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Actual Negative (0)</th>
+                            <td>{{ results.confusion_matrix[0][0] }} (True Negative)</td>
+                            <td>{{ results.confusion_matrix[0][1] }} (False Positive)</td>
+                        </tr>
+                        <tr>
+                            <th>Actual Positive (1)</th>
+                            <td>{{ results.confusion_matrix[1][0] }} (False Negative)</td>
+                            <td>{{ results.confusion_matrix[1][1] }} (True Positive)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="visualization-section">
+            <h2>Visualization</h2>
+            <div class="plot-container">
+                <img src="data:image/png;base64,{{ results.plot }}" alt="Regression Plot" class="result-plot">
+            </div>
+        </div>
+
+        <div class="data-preview">
+            <h2>Data Preview (First 5 rows)</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            {% for column in results.data_preview[0].keys() %}
+                            <th>{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in results.data_preview %}
+                        <tr>
+                            {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/" class="btn btn-primary">Perform Another Analysis</a>
+        </div>
+    </div>
+</body>
+</html>
