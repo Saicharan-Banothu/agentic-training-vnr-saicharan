@@ -1,0 +1,691 @@
+{
+  "name": "Agenti-AI Project",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "extraction",
+        "operation": "query",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Start_Browser` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Start_Browser` tool\", 'string') }}",
+        "prompt": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "bc227ac1-2645-4bf8-91d5-f9144c0928b0",
+      "name": "Query",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        1280,
+        496
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtopApi": {
+          "id": "xV63dT5o5cj2eBQy",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "window",
+        "operation": "load",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Start_Browser` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Start_Browser` tool\", 'string') }}",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "c27d4067-4e49-4127-84a5-070eb4ff4108",
+      "name": "Load URL",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        1408,
+        496
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtopApi": {
+          "id": "xV63dT5o5cj2eBQy",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "operation": "type",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Start_Browser` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Start_Browser` tool\", 'string') }}",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "pressEnterKey": true,
+        "elementDescription": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Element_Description', `Search bars usually contain a placeholder that says \"search\"`, 'string') }}",
+        "additionalFields": {}
+      },
+      "id": "58529ba1-9615-40c3-9e30-bc049a37fafa",
+      "name": "Type",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        1168,
+        496
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtopApi": {
+          "id": "xV63dT5o5cj2eBQy",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "D09Q5BFBEE8",
+          "mode": "id"
+        },
+        "text": "=Watch your agent work!\n\n{{ $json.data.liveViewUrl }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": true
+        }
+      },
+      "id": "19f45369-3b2f-4238-ac48-0d42c4b37998",
+      "name": "Slack",
+      "type": "n8n-nodes-base.slack",
+      "position": [
+        1248,
+        704
+      ],
+      "webhookId": "72d47d9c-6860-4248-8e83-7790264fdaf2",
+      "typeVersion": 2.3,
+      "credentials": {
+        "slackApi": {
+          "id": "GmR0Ut87A8DnwkIM",
+          "name": "Slack account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "profileName": "={{ $json.profile_name }}",
+        "timeoutMinutes": "={{ 10 }}",
+        "additionalFields": {}
+      },
+      "id": "fc5d030a-26a5-4d09-afdd-8485001f17e6",
+      "name": "Session",
+      "type": "n8n-nodes-base.airtop",
+      "position": [
+        880,
+        704
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtopApi": {
+          "id": "kFyE3Ka5dpHjapma",
+          "name": "Airtop account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "window",
+        "url": "={{ $('When Executed by Another Workflow').item.json.url }}",
+        "getLiveView": true,
+        "additionalFields": {}
+      },
+      "id": "34e05370-03e9-4e7c-8f20-3edb692a41e8",
+      "name": "Window",
+      "type": "n8n-nodes-base.airtop",
+      "position": [
+        1072,
+        704
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtopApi": {
+          "id": "kFyE3Ka5dpHjapma",
+          "name": "Airtop account 6"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0a0680af-39bd-4bc7-b9cd-84c1766c79a1",
+              "name": "sessionId",
+              "type": "string",
+              "value": "={{ $('Session').item.json.sessionId }}"
+            },
+            {
+              "id": "13940ee8-c1d4-4718-a7b4-176c44c097b7",
+              "name": "windowId",
+              "type": "string",
+              "value": "={{ $('Window').item.json.data.windowId }}"
+            },
+            {
+              "id": "a0f2005c-2cd2-4a8d-891b-a4759b72a124",
+              "name": "output",
+              "type": "string",
+              "value": "Session and window created successfully"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "17e54fc4-1030-499c-af02-efd6ee28ba29",
+      "name": "Return IDs",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1424,
+        704
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "url"
+            },
+            {
+              "name": "Profile_name"
+            }
+          ]
+        }
+      },
+      "id": "8640d624-9e33-40c1-9d5e-c4c6cec52c4c",
+      "name": "When Executed by Another Workflow",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        704,
+        704
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "name": "Start_Browser",
+        "description": "Start a new browser session and window",
+        "workflowId": {
+          "__rl": true,
+          "value": "Iwz75qjAOxukwju9",
+          "mode": "id"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Profile_name": "TheAtom007",
+            "url": "https://web.telegram.org"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            },
+            {
+              "id": "Profile_name",
+              "displayName": "Profile_name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "id": "9e84650f-d5a7-4e99-87ca-0deb3d445a52",
+      "name": "Start Browser",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "position": [
+        928,
+        496
+      ],
+      "typeVersion": 2.1
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        224
+      ],
+      "id": "dccc8dc0-c62a-47c6-864b-a53678466944",
+      "name": "When chat message received",
+      "webhookId": "5098f362-c62a-4b7b-9370-0129f90e8553"
+    },
+    {
+      "parameters": {
+        "operation": "terminate",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Start_Browser` tool\", 'string') }}"
+      },
+      "id": "5c198db3-3df7-4ca5-ade1-cb0e7f487c94",
+      "name": "End Session",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        1520,
+        496
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "airtopApi": {
+          "id": "xV63dT5o5cj2eBQy",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1,
+      "position": [
+        704,
+        496
+      ],
+      "id": "7103bcef-e0a7-4810-81ae-9e311ae0d533",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=# Overview\nYou are a smart, advanced web agent connected to tools that let you control a remote web browser. Your primary goal is to fulfill the human's request accurately and efficiently by interacting with web pages using your tools.\n\n## Tools\n\n### Start_Browser\n- Always begin with this tool.\n- It returns a `sessionId` and `windowId` which are **required** for all other tools.\n- You must include these IDs in every subsequent tool call.\n\n### Load URL\n- Loads a website in the browser window.\n- Pass the `sessionId`, `windowId`, and the desired URL (e.g., `\"https://www.bestbuy.com\"`).\n\n### Query\n- You don't have access to the browser screen but you can call this tool to get knowledge and hints of the current browser window.\n- Use this tool to retrieve information that the human asked for.\n\n### Click\n- Use this tool to click on elements like buttons.\n\n### Type\n- Use this to type text into a visible input field. This tool clicks Enter after typing the text so don't send [ENTER] commandes.\n\n### End Session\n- When the task is fully complete, use this tool to properly close the browser session.\n- You must ALWAYS USE THIS TOOL BEFORE RESPONDING TO THE HUMAN\n\n### Think\n- Use when you need to reflect on what you've done and think about what steps to take next\n\n\n## Important\n- Always think step-by-step. Use `Query` whenever you’re unsure what’s on the screen or what to click/type next.\n- You will NEVER need to login",
+          "maxIterations": 20,
+          "returnIntermediateSteps": false,
+          "passthroughBinaryImages": true
+        }
+      },
+      "id": "1978aed1-bc94-494c-9346-75cfe61453b5",
+      "name": "Browser Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1152,
+        224
+      ],
+      "retryOnFail": true,
+      "typeVersion": 1.8,
+      "waitBetweenTries": 5000
+    },
+    {
+      "parameters": {
+        "content": "# Browser Agent\n",
+        "height": 240,
+        "width": 760,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        144
+      ],
+      "id": "80df2c97-5dad-45c5-9bb7-fb8eafa5f3f3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Browser Tools\n",
+        "height": 220,
+        "width": 760,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        880,
+        416
+      ],
+      "id": "b41a6614-6418-4802-b0a2-50858d52cd19",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Think",
+        "height": 220,
+        "width": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        608,
+        416
+      ],
+      "id": "dd15da1c-5f3d-435a-b416-4cbda7dd4281",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Model / Memory",
+        "height": 240,
+        "width": 260,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        608,
+        144
+      ],
+      "id": "d0d02459-2a35-4313-ad8e-eaace9562344",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 200,
+        "width": 160,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        432
+      ],
+      "id": "c4407f91-7923-48ba-8dd7-91d0e45562e1",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Start Browser Tool",
+        "height": 240,
+        "width": 1040,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        608,
+        656
+      ],
+      "id": "603894da-2908-488e-b59e-1861c2c1f62e",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        640,
+        256
+      ],
+      "id": "f8f25685-8bec-4632-9239-a9ad3dae1795",
+      "name": "3.5 Sonnet",
+      "credentials": {
+        "openRouterApi": {
+          "id": "cScpzFKlDXsbqF46",
+          "name": "OpenRouter account 3"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        752,
+        256
+      ],
+      "id": "a07439f6-b6df-4715-a51c-6179427b9d63",
+      "name": "Memory"
+    },
+    {
+      "parameters": {
+        "resource": "interaction",
+        "sessionId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Session_ID', \"The `sessionId` returned by the `Start_Browser` tool\", 'string') }}",
+        "windowId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Window_ID', \"The `windowId` returned by the `Start_Browser` tool\", 'string') }}",
+        "elementDescription": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Element_Description', `Describe in detail the element to click on, e.g. The menu item \"about us\" at the top of the page`, 'string') }}",
+        "additionalFields": {
+          "waitForNavigation": "domcontentloaded"
+        }
+      },
+      "id": "16caf6df-794a-4ca2-8965-7e848c323fd7",
+      "name": "ClickTool",
+      "type": "n8n-nodes-base.airtopTool",
+      "position": [
+        1712,
+        496
+      ],
+      "typeVersion": 1,
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtopApi": {
+          "id": "xV63dT5o5cj2eBQy",
+          "name": "Airtop account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to click on an element",
+        "method": "POST",
+        "url": "=https://api.airtop.ai/api/v1/sessions/{{ $fromAI('sessionId') }}/windows/{{ $fromAI('windowId') }}/click",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "elementDescription",
+              "value": "={{ $fromAI('elementDescription', `the element to click on in as much detail as possible`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.2,
+      "position": [
+        1040,
+        496
+      ],
+      "id": "dced9d40-1e87-45a1-b5ee-adbcac5dda24",
+      "name": "Click",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "ntzlYFN8AMkxzh7c",
+          "name": "Header Auth account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# 🛠️ Setup Guide\n\n### 🔌 Steps to Connect:\n1. **Airtop Setup**  \n   - Visit [Airtop](https://www.airtop.ai/) to generate your API key and connect to the Airtop tools/nodes.  \n   - Set up a profile with credentials (if automating websites like X, \nLinkedIn, or Amazon).  \n   - Connect your profile in the Start Browser tool.\n   - 💸 Use code **`NateHalfOff`** for **50% off Airtop for 3 months**.\n\n2. **OpenRouter API Key**  \n   - Go to [OpenRouter](https://openrouter.ai/) and generate your API key.  \n   - Paste this key into your **Chat Model** node in n8n.\n\n3. **Start Browser Tool Setup**  \n   - Link your **Start Browser workflow** to the **Start Browser Tool**:\n     - Either link it using the **ID method** .\n     - Or paste the **Start Browser Tool** workflow into a separate n8n workflow and link it directly.\n\n4. **(Optional) Live Agent Browser View**  \n   - Connect additional services like:\n     - [Slack](https://slack.com/)\n     - [Telegram](https://telegram.org/)\n     - [Gmail](https://mail.google.com/)\n   - This allows you to **receive a live browser link** while your agent is running automations.\n\n\n",
+        "height": 740,
+        "width": 660
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        144
+      ],
+      "id": "0c1fcd79-dead-460c-aadf-5143671bc099",
+      "name": "Sticky Note6"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Type": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack": {
+      "main": [
+        [
+          {
+            "node": "Return IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window": {
+      "main": [
+        [
+          {
+            "node": "Slack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Session": {
+      "main": [
+        [
+          {
+            "node": "Window",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load URL": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start Browser": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "End Session": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3.5 Sonnet": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Click": {
+      "ai_tool": [
+        [
+          {
+            "node": "Browser Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6a0bb1a9-c9e5-46da-83a0-609815018637",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a01c12a36f208b048a6c6756be292583778c3031fc3d3d48bf69984d82717ee6"
+  },
+  "id": "Iwz75qjAOxukwju9",
+  "tags": []
+}
