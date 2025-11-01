@@ -64,6 +64,9 @@ User Input → Chat Trigger → Browser Agent → Tool Selection → External AP
 
 ### 4.1. Workflow Execution Flow
 
+<img width="1299" height="534" alt="Project Workflow" src="https://github.com/user-attachments/assets/3599df10-1e8f-4c71-99ed-ca7c406852f0" />
+
+
 ```
 1. TRIGGER PHASE
    User Message → Chat Webhook → Agent Invocation
