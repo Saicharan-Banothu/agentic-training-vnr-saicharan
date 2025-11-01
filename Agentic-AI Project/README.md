@@ -85,6 +85,15 @@ User Input → Chat Trigger → Browser Agent → Tool Selection → External AP
    - Final response returned to user
 ```
 
+##Outputs
+
+### User giving messege to trigger workflow
+<img width="1302" height="521" alt="messege trigger and chat outcome" src="https://github.com/user-attachments/assets/8ec6a576-da54-4f16-95e1-5d3b9cb59feb" />
+
+
+### Live Browser
+<img width="1365" height="732" alt="LiveBrowser Output" src="https://github.com/user-attachments/assets/107da9fc-839a-4b91-a977-650f39adc4d7" />
+
 ### 4.2. Tool Specifications
 
 **Start_Browser Tool**
