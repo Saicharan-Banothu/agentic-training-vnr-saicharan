@@ -85,7 +85,6 @@ User Input → Chat Trigger → Browser Agent → Tool Selection → External AP
    - Final response returned to user
 ```
 
-## Outputs
 
 ### User giving messege to trigger workflow
 <img width="1302" height="521" alt="messege trigger and chat outcome" src="https://github.com/user-attachments/assets/8ec6a576-da54-4f16-95e1-5d3b9cb59feb" />
