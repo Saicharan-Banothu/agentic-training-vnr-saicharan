@@ -237,3 +237,11 @@ User Input → Chat Trigger → Browser Agent → Tool Selection → External AP
 
 The Agenti-AI Project demonstrates a production-ready implementation of agentic AI principles for web automation. By combining n8n's workflow orchestration with modern LLM capabilities and browser automation services, it creates a robust system for transforming natural language commands into automated web interactions. The architecture provides a solid foundation for extending into more complex multi-agent systems and enterprise-scale automation solutions.
 
+## PPT Presentation
+
+https://gamma.app/docs/w8mm1u5jat06nfi?following_id=cg1qektjs0pxg3u&follow_on_start=true
+
+## Demonstration Vedio 
+
+https://drive.google.com/file/d/1WcGRz6TQPIkEPRfO9Jqjd0w4Tj33_Hq6/view?usp=sharing
+
