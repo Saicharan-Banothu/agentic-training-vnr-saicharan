@@ -1,5 +1,5 @@
 
-# Agenti-AI Project: Autonomous Web Interaction Agent
+# Agentic-AI Project: Autonomous Web Interaction Agent
 
 ## Document Version: 1.0
 
